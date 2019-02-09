@@ -18,10 +18,6 @@ def findstuff(url):
     address = replace_all(address,dic)
     print(address)
 
-    #title
-    title = soup.find('title',text=True).get_text(strip=True).split('-')[0]
-    print(title)
-
     #price(done)
     for price in soup('span',attrs={'class':"price"}):
         prices = re.findall(r'[0-9]+',str(price))
@@ -38,13 +34,27 @@ def replace_all(text, dic):
     for i, j in dic.items():
         text = text.replace(i, j)
     return text
-
 def main():
-    with open('urls.txt','r') as f:
-        urls = [url.rstrip() for url in f]
+    firstPage = 'http://www.malimalihome.net/residential?status=1&photo=1&orderby=2'
+    urls = list()
+    html = requests.get(firstPage).text
+    for url in re.findall('http://www.malimalihome.net/residential/[0-9]+',html):
+        if url not in urls:
+            urls.append(url)
+    for url in urls:
+        findstuff(url)
+    pageNum = 2
+    while 1:
+        urls = list()
+        genericPage = f'http://www.malimalihome.net/residential?status=1&photo=1&orderby=2&page={pageNum}'
+        html = requests.get(genericPage).text
+        for url in re.findall('http://www.malimalihome.net/residential/[0-9]+',html):
+            if url not in urls:
+                urls.append(url)
+        pageNum += 1
         for url in urls:
             findstuff(url)
-            print(url)
+        print()
 
 if __name__ == '__main__':
     main()

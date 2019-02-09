@@ -9,6 +9,9 @@ def main():
         urls = [line.rstrip() for line in f]
         pageNum = 1
         while 1:
+            #'http://www.malimalihome.net/residential?status=1&region1=3&page={pageNum}' Macau
+            #'http://www.malimalihome.net/residential?status=1&region1=1&page={pageNum}' Taipa
+            #'http://www.malimalihome.net/residential?status=1&region1=6&page={pageNum}' Coloane
             genericPage = f'http://www.malimalihome.net/residential?status=1&region1=3&page={pageNum}'
             print(f'requesting {genericPage}')
             response = requests.get(genericPage)
