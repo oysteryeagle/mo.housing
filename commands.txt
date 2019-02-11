@@ -1,0 +1,8 @@
+select name,address, lat,long,price,url from Housing where lat is not null and lat is not 0
+
+Array=csvread('filename.csv');
+col1 = Array(:, 1);
+col2 = Array(:, 2);
+plot(col1, col2)
+
+saveas(gcf,'Barchart.png')

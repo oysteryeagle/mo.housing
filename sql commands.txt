@@ -1,1 +1,0 @@
-select name,address, lat,long,price,url from Housing where lat is not null and lat is not 0
