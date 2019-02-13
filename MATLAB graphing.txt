@@ -1,0 +1,10 @@
+Array=csvread('filename.csv');
+col1 = Array(:, 1);
+col2 = Array(:, 2);
+plot(col1, col2)
+scatter(col1, col2)
+
+scatter(col2,col3,30,sqrt(sqrt(col1)),'filled','o')
+
+
+saveas(gcf,'Barchart.png')

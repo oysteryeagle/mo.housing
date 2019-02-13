@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 import re
 
 def main():
-    with open('urlsColoane.txt','a+') as f:
+    with open('urlsMacau.txt','a+') as f:
         f.seek(0)
         urls = [line.rstrip() for line in f]
         pageNum = 1
@@ -12,7 +12,7 @@ def main():
             #'http://www.malimalihome.net/residential?status=1&region1=3&page={pageNum}' Macau
             #'http://www.malimalihome.net/residential?status=1&region1=1&page={pageNum}' Taipa   Stopped at 250
             #'http://www.malimalihome.net/residential?status=1&region1=6&page={pageNum}' Coloane
-            genericPage = f'http://www.malimalihome.net/residential?status=1&region1=6&page={pageNum}'
+            genericPage = f'http://www.malimalihome.net/residential?status=1&region1=3&page={pageNum}'
             print(f'requesting {genericPage}')
             response = requests.get(genericPage)
             if response.status_code != 200:

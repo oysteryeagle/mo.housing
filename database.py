@@ -16,29 +16,48 @@ def findstuff(url):
     #print(address)
 
     #region
-    tabletags = [tag for tag in soup('td',attrs={'class':"td2"})]
-    region = remove_tags(str(tabletags[1]))
-    #print(f'region: {region}')
+    tabletags = [tag for tag in soup('td',attrs={'class':"td2"})]      #each real estate listing has a table that displays the general information about the listing.
+    for n in range(len(tabletags)):
+        tabletags[n] = replace_all(remove_tags(str(tabletags[n])),dic)
+    region = tabletags[1] #return
+
+    #csize
+    csize = re.findall(r'([0-9]+)呎',tabletags[6]) #return
+    if len(csize)>0:
+        csize = csize[0]
+    else:csize = 'NULL'
+
+    #rsize
+    rsize = re.findall(r'([0-9]+)呎',tabletags[7])
+    if len(rsize)>0:
+        rsize = rsize[0]
+    else:
+        rsize = 'NULL'
 
     #name
     name = soup.find('title',text=True).get_text(strip=True).split('-')[0]  #return
-    #print(name)
 
     #price(done)
-    pricexml = soup('div',attrs={'class':"view-price-div view-price-red"})
-    price = re.findall(r'[0-9]+',str(pricexml))[0]
+    price = re.findall(r'\$([0-9]+)萬',tabletags[8])[0] #return
+
+    #pricepsqft
+    pricepsqft = re.findall(r'\$([0-9]+.?[0-9]*)元',tabletags[9]) #return
+    if len(pricepsqft)>0:
+        pricepsqft = pricepsqft[0]
+    else:
+        pricepsqft = 'NULL'
 
     #location(done)
-    coordinates = '0'
-    lat = '0'
-    long = '0'
+    coordinates = '0.0000000000'
+    lat = '0.0000000000'
+    long = '0.0000000000'
     for x in soup('script',attrs={'type':"text/javascript"},text=True):
         location = re.findall('google.maps.LatLng\(([0-9]*.[0-9]*, [0-9]*.[0-9]*)\)',str(x))
         if len(location)>0:
             coordinates = location[0]
             lat = coordinates.split(', ')[0]
             long = coordinates.split(', ')[1]
-    return (name,address,region,price,coordinates,lat,long)
+    return (name,address,region,csize,rsize,price,pricepsqft,coordinates,lat,long)
 #address(done)
 def replace_all(text, dic):
     for i, j in dic.items():
@@ -52,18 +71,21 @@ def main():
         #cur.execute('''DROP TABLE IF EXISTS Housing''')
         urls = [url.rstrip() for url in f]
         for url in urls:
-            #try:
-            (name,address,region,price,coordinates,lat,long) = findstuff(url)
-            print(url,name,address,region,price,coordinates,lat,long)
-            #except KeyboardInterrupt:
-            #    raise
-            #except:
-            #    print(f'skipped {url}')
-            #    continue
+            try:
+                (name,address,region,csize,rsize,price,pricepsqft,coordinates,lat,long) = findstuff(url)
+                print(url,name,address,region,csize,rsize,price,pricepsqft,coordinates,lat,long)
+            except KeyboardInterrupt:
+                raise
+            except:
+                print(f'skipped {url}')
+                continue
             cur.execute('''CREATE TABLE IF NOT EXISTS Housing (
-            id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, url TEXT UNIQUE,name TEXT,address TEXT,region TEXT,price INTEGER, coordinates INTEGER
+            id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, url TEXT UNIQUE,name TEXT,address TEXT,
+            region TEXT,csize INTEGER,rsize INTEGER,price INTEGER,pricepsqft FLOAT,coordinates INTEGER
             , lat, long)''')
-            cur.execute('''INSERT OR IGNORE INTO Housing (url,name,address,region,price,coordinates,lat,long) VALUES (?,?,?,?,?,?,?,?)''',(url,name,address,region,price,coordinates,lat,long))
+            cur.execute('''INSERT OR IGNORE INTO Housing (url,name,address,
+            region,csize,rsize,price,pricepsqft,coordinates,lat,long) VALUES
+             (?,?,?,?,?,?,?,?,?,?,?)''',(url,name,address,region,csize,rsize,price,pricepsqft,coordinates,lat,long))
             conn.commit()
             #if tic >= 5:
             #    inp = input('committed')
