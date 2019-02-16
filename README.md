@@ -6,7 +6,7 @@ displays real estate listings in Macau on a map with urls that links to the real
 ![alt text](https://github.com/oysteryeagle/mo.housing/blob/master/graphs%20and%20maps/Taipa.jpg)
 
 # housing prices per sqft in Macau Peninsula
-![alt text](https://github.com/oysteryeagle/mo.housing/blob/master/graphs%20and%20maps/colorLatLong.png)
+![alt text](https://github.com/oysteryeagle/mo.housing/blob/master/graphs%20and%20maps/listings.png)
 currency: Macanese Pataca
 ![alt text](https://github.com/oysteryeagle/mo.housing/blob/master/graphs%20and%20maps/pricepsqftLat.png)
 ![alt text](https://github.com/oysteryeagle/mo.housing/blob/master/graphs%20and%20maps/pricepsqftLong.png)
