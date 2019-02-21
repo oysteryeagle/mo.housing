@@ -1,6 +1,7 @@
 Array=csvread('filename.csv');
 col1 = Array(:, 1);
 col2 = Array(:, 2);
+col3 = Array(:, 3);
 plot(col1, col2)
 scatter(col1, col2)
 

@@ -65,7 +65,7 @@ def replace_all(text, dic):
     return text
 
 def main():
-    with open('urlsMacau.txt','r') as f:
+    with open('urlsColoane.txt','r') as f:
         conn = sqlite3.connect('database.db')
         cur = conn.cursor()
         #cur.execute('''DROP TABLE IF EXISTS Housing''')
