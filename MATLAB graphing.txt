@@ -1,11 +1,74 @@
-Array=csvread('filename.csv');
-col1 = Array(:, 1);
-col2 = Array(:, 2);
-col3 = Array(:, 3);
-plot(col1, col2)
-scatter(col1, col2)
+Macau = csvread('MacauRegionPpsqft.csv');
+Taipa = csvread('TaipaRegionPpsqft.csv');
+Coloane = csvread('ColoaneRegionPpsqft.csv');
 
-scatter(col2,col3,30,sqrt(sqrt(col1)),'filled','o')
+macau1 = Macau(:, 1);
+macau2 = Macau(:, 2);
+macau3 = Macau(:, 3);
+
+taipa1 = Taipa(:, 1);
+taipa2 = Taipa(:, 2);
+taipa3 = Taipa(:, 3);
+
+coloane1 = Coloane(:, 1);
+coloane2 = Coloane(:, 2);
+coloane3 = Coloane(:, 3);
 
 
+figure(1)
+scatter(macau2,macau1,'filled','red')
+hold on
+scatter(taipa2,taipa1,'filled','blue')
+hold on
+scatter(coloane2,coloane1,'filled','green')
+title('Price per square feet against latitude')
+xlabel('Latitude')
+ylabel('Price per square feet')
+axis([22.1 22.22 2000 17000])
+legend('Macau','Taipa','Coloane')
+
+figure(2)
+scatter(macau3,macau1,'filled','red')
+hold on
+scatter(taipa3,taipa1,'filled','blue')
+hold on
+scatter(coloane3,coloane1,'filled','green')
+title('Price per square feet against longitude')
+xlabel('Longitude')
+ylabel('Price per square feet')
+axis([113.53 113.57 2000 17000])
+legend('Macau','Taipa','Coloane')
 saveas(gcf,'Barchart.png')
+
+figure(3)
+scatter3(macau3,macau2,macau1,'filled','red')
+hold on
+scatter3(taipa3,taipa2,taipa1,'filled','blue')
+hold on
+scatter3(coloane3,coloane2,coloane1,'filled','green')
+legend('Macau','Taipa','Coloane')
+title('3D visualization of housing prices in Macau')
+xlabel('longitude')
+ylabel('latitude')
+zlabel('price per square feet')
+
+figure(4)
+scatter(macau3,macau2,macau1.^4/100000000000000,'red','filled')
+title('Housing prices visualization (Macau)')
+ylabel('Latitude')
+xlabel('Longitude')
+axis([113.52 113.57 22.17 22.22])
+
+figure(5)
+scatter(taipa3,taipa2,taipa1.^4/100000000000000,'blue','filled')
+title('Housing prices visualization (Taipa)')
+ylabel('Latitude')
+xlabel('Longitude')
+axis([113.54 113.57 22.15 22.17])
+
+#to amplify difference, add one power and divide by 10000
+saveas(gcf,'Barchart.png')
+
+
+SQL commands:
+select pricepsqft,lat,long from Housing where region is '路環' and lat is not '0.0000000000' and pricepsqft is not 'NULL' order by pricepsqft desc
