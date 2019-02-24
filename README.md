@@ -1,7 +1,6 @@
 # mo.housing
 A data visualization project\
-Solarized dark             |  Solarized Ocean
-:-------------------------:|:-------------------------:
+<img src="https://github.com/oysteryeagle/mo.housing/blob/master/graphs%20and%20maps/whole.png" width="425"/> <img src="https://github.com/oysteryeagle/mo.housing/blob/master/graphs%20and%20maps/listings.png" width="425"/> 
 ![alt text](https://github.com/oysteryeagle/mo.housing/blob/master/graphs%20and%20maps/whole.png) |  ![alt text](https://github.com/oysteryeagle/mo.housing/blob/master/graphs%20and%20maps/listings.png)
 ![alt text](https://github.com/oysteryeagle/mo.housing/blob/master/graphs%20and%20maps/Price%20per%20square%20feet%20against%20longitude.png)
 ![alt text](https://github.com/oysteryeagle/mo.housing/blob/master/graphs%20and%20maps/Price%20per%20square%20feet%20against%20latitude.png)
