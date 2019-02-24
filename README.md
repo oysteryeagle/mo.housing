@@ -1,5 +1,5 @@
 # mo.housing
-A data visualization project
+A data visualization project\
 ![alt text](https://github.com/oysteryeagle/mo.housing/blob/master/graphs%20and%20maps/whole.png)
 ![alt text](https://github.com/oysteryeagle/mo.housing/blob/master/graphs%20and%20maps/listings.png)
 ![alt text](https://github.com/oysteryeagle/mo.housing/blob/master/graphs%20and%20maps/Price%20per%20square%20feet%20against%20longitude.png)
