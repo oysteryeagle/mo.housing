@@ -10,3 +10,6 @@ The purpose of this project is to visualize the housing prices in different part
 ![alt text](https://github.com/oysteryeagle/mo.housing/blob/master/graphs%20and%20maps/Macau%20Prices%20visualization.png)
 ![alt text](https://github.com/oysteryeagle/mo.housing/blob/master/graphs%20and%20maps/Taipa.png)
 ![alt text](https://github.com/oysteryeagle/mo.housing/blob/master/graphs%20and%20maps/Taipa%20Prices%20visualization.png)
+
+Applying linear regression to fit a relationship between constructed size and price of housing.
+![alt text](https://github.com/oysteryeagle/mo.housing/blob/master/graphs%20and%20maps/machine-learning-price-csize.png)
